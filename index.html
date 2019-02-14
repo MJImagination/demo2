@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <span v-if="seen">Now you see me</span>
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+
+
+        <p>{{message}}</p>
+        <input v-model=" message ">
+        <input v-model=" message">
+
+        <ol>
+            <todo-item></todo-item>
+        </ol>
+
+
+        <ol>
+            <todo-item2 v-for="item in groceryList" v-bind:todo2="item" v-bind:key="item.id">
+            </todo-item2>
+        </ol>
+    </div>
+
+
+    <div id="app-2">
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+
+        <!-- 错误示例 -->
+        <!-- <span title="{{message}}">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span> -->
+
+    </div>
+
+
+    <div id="demo">
+        <button v-on:click="show = !show">
+            动画效果
+        </button>
+        <transition name="fade">
+            <p v-if="show">显示</p>
+            <!-- <p v-if="!show">影藏</p> -->
+        </transition>
+    </div>
+
+
+
+    <div id="demo1">
+        <p>{{message}}</p>
+        <input v-model="message">
+        <button v-on:click="reverseMessage">逆转消息</button>
+        <p>Computed reversed message: "{{reversedMessageStr}}"</p>
+    </div>
+
+    <div id="demo2">{{ firstName }}</div>
+
+    <div id="demo3">
+        <P>{{firstName}} - {{lastName}}</P>
+        <p>{{fullName}}</p>
+        <input v-model="fullNameChange">
+        <button v-on:click="fullNameChange = firstName">改变名字</button>
+        <button v-on:click="onClick">改变名字</button>
+    </div>
+
+    <div id="demo4">
+        <template v-if="loginType == 'userName'">
+            <label>UserName</label>
+            <input placeholder="请输入姓名">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="请输入Email">
+        </template>
+        <button v-on:click="toggleLoginType">Togggle login type</button>
+        <li v-for="n in evenNumbers">{{ n }}</li>
+        <li v-for="n in even(numbers)">{{ n }}</li>
+    </div>
+
+
+    <div id="todo-list-example">
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat">
+            <button>Add</button>
+        </form>
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title"
+                v-on:remove="todos.splice(index, 1)"></li>
+        </ul>
+    </div>
+
+    <!-- html自带提示 -->
+    <span title="我这个属性只要鼠标停留在上面就会显示出来">span自带悬浮提示</span>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
